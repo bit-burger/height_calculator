@@ -1,4 +1,4 @@
-name: height_calculator
+name: HEIGHT
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -31,18 +31,23 @@ dependencies:
   keyboard_actions: "^3.3.1+1"
   basic_utils: ^1.5.0
   flutter_awesome_alert_box: ^1.0.1
-
+  auto_size_text_field: ^0.1.7
 
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+flutter_icons:
+  image_path: 'assets/icon.png'
+  android: true
+  ios: true
 flutter:
 
   # The following line ensures that the Material Icons font is

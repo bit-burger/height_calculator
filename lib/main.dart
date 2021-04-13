@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:basic_utils/basic_utils.dart';
 import 'awesome_flutter_tonyversion.dart';
+import 'package:auto_size_text_field/auto_size_text_field.dart';
 
 void main() {
   runApp(MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Height Calculator',
       theme: ThemeData(
         primaryColor: secondColor,
         scaffoldBackgroundColor: firstColor,
@@ -106,8 +108,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -115,72 +115,72 @@ class _MyAppState extends State<MyApp> {
           style: TextStyle(color: fifthColor),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 100),
-        child: Container(
-          child: KeyboardActions(
-            config: _buildConfig(context),
-            child: Center(
-              child: TextField(
-                controller: this._controller,
-                focusNode: _nodeText1,
-                onSubmitted: (String text) {
+      body: KeyboardActions(
+        config: _buildConfig(context),
+        child: Center(
+          child: Container(
+            width: 220,
+            child: TextField(
 
-                  whenFinished();
 
-                },
-                onChanged: (String text) {
-                  print(text);
+              controller: this._controller,
+              focusNode: _nodeText1,
+              onSubmitted: (String text) {
 
-                  if (text[text.length - 1] == "c") {
-                    print("delete");
-                    text = text.substring(0, text.length - 2);
-                  }
-                  if (text.length > 5) {
-                    text = lastString;
-                  }
+                whenFinished();
 
-                  String newString = "";
-                  for (int i = 0; i < text.length; i++) {
-                    String char = text[i];
-                    if (StringUtils.isDigit(char)) {
-                      newString += char;
-                    }
+              },
+              onChanged: (String text) {
+                print(text);
+
+                if (text[text.length - 1] == "c") {
+                  print("delete");
+                  text = text.substring(0, text.length - 2);
+                }
+                if (text.length > 5) {
+                  text = lastString;
+                }
+
+                String newString = "";
+                for (int i = 0; i < text.length; i++) {
+                  String char = text[i];
+                  if (StringUtils.isDigit(char)) {
+                    newString += char;
                   }
-                  if (newString.length == 0) {
-                    _controller.text = "";
-                  } else {
-                    _controller.text = newString + "cm";
-                  }
-                  lastString = _controller.text;
-                  _controller.selection = TextSelection.fromPosition(
-                      TextPosition(offset: _controller.text.length));
-                  setState(() {});
-                },
-                obscureText: false,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+                }
+                if (newString.length == 0) {
+                  _controller.text = "";
+                } else {
+                  _controller.text = newString + "cm";
+                }
+                lastString = _controller.text;
+                _controller.selection = TextSelection.fromPosition(
+                    TextPosition(offset: _controller.text.length));
+                setState(() {});
+              },
+              obscureText: false,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: _nodeText1.hasFocus ? secondColor : fifthColor,
+              ),
+              decoration: InputDecoration(
+                labelText: "Height in cm",
+                labelStyle: TextStyle(
                   color: _nodeText1.hasFocus ? secondColor : fifthColor,
                 ),
-                decoration: InputDecoration(
-                  labelText: "Height in cm",
-                  labelStyle: TextStyle(
-                    color: _nodeText1.hasFocus ? secondColor : fifthColor,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25)),
-                    borderSide: BorderSide(color: fifthColor, width: 3.5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25)),
-                    borderSide: BorderSide(color: secondColor, width: 5.0),
-                  ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  borderSide: BorderSide(color: fifthColor, width: 3.5),
                 ),
-                showCursor: false,
-                keyboardType: TextInputType.number,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  borderSide: BorderSide(color: secondColor, width: 5.0),
+                ),
               ),
+              showCursor: false,
+              keyboardType: TextInputType.number,
             ),
           ),
         ),
